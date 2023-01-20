@@ -18,6 +18,22 @@ header {
     z-index: 99;
 }
 
+.custom-button {
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #C89ECF;
+    width: 120px;
+    height: 30px;
+    margin-top: 16px;
+    text-decoration: none;
+    color: #C89ECF;
+    border-radius: 10px;
+}
+
+#cultureForm {
+    padding: 110px 0;
+}
+
 .logo {
     font-size: 22px;
 }
@@ -76,7 +92,7 @@ header {
     margin-bottom: 20px;
     margin-left: 30px;
     text-align: center;
-    border: 1px solid purple;
+    border: 1px solid #C89ECF;
 }
 
 
@@ -84,7 +100,7 @@ header {
     width: 154px;
     height: 115px;
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     align-items: center;
 }
 

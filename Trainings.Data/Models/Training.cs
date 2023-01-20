@@ -7,12 +7,12 @@ namespace Trainings.Data.Models
         [Required]
         public Guid Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Image is required")]
         public string Image { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Technology is required")]
         public Guid TechnologyId { get; set; }
         public virtual Technology Technology { get; set; }
     }

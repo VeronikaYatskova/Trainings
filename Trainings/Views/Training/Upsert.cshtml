@@ -1,17 +1,21 @@
-﻿@model Trainings.Models.Request.TrainingRequestModel
+﻿@using Microsoft.AspNetCore.Builder
+@using Trainings.Services
+
+@inject LanguageService language
+
+@model Trainings.Models.Request.TrainingRequestModel
 
 @{
-    var title = "Create Training";
+    var title = language.GetKey("Create Training");
 }
 
 <form method="post" enctype="multipart/form-data">
     @if (Model.Id is not null)
     {
-        title = "Edit Training";
+        title = @language.GetKey("Edit Training");
         <input asp-for="Id" hidden />
     }
     <div class="border p-3">
-
         <div class="form-group row">
             <h2 class="text-info pl-3">@title</h2>
         </div>
@@ -19,7 +23,7 @@
             <div class="col-8">
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Name"></label>
+                        <label>@language.GetKey("Name")</label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Name" class="form-control" />
@@ -28,7 +32,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        Image
+                        @language.GetKey("Image")
                     </div>
                     <div class="col-8">
                         <input type="file" name="files" id="uploadBox" multiple class="form-control" />
@@ -36,7 +40,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="TechnologyId"></label>
+                        <label>@language.GetKey("Technology")</label>
                     </div>
                     <div class="col-8">
                         <select asp-for="TechnologyId" asp-items="@Model.TechnologySelectList" class="form-control">

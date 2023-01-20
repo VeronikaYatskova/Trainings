@@ -1,7 +1,11 @@
-﻿@model IEnumerable<Trainings.Models.Response.TrainingModel>
+﻿@using Trainings.Services
+
+@inject LanguageService language
+
+@model IEnumerable<Trainings.Models.Response.TrainingModel>
 
 <div class="text-center">
-    <h1>Тренинги</h1>
+    <h1>@language.GetKey("Trainings")</h1>
 </div>
 <br/>
 <div class="card-colomns" style="display: flex;
@@ -15,6 +19,7 @@
                 <h5 class="card-title">
                     @training.Name
                 </h5>
+                <a href="#" class="custom-button">@language.GetKey("Register")</a>
             </div>
         </div>
     }

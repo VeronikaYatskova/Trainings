@@ -1,13 +1,17 @@
-﻿@model IEnumerable<Trainings.Models.Response.TrainingModel>
+﻿@using Trainings.Services
+
+@inject LanguageService language
+
+@model IEnumerable<Trainings.Models.Response.TrainingModel>
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Trainings</h2>
+            <h2 class="text-primary">@language.GetKey("Trainings")</h2>
         </div>
         <div class="col-6 text-right">
             <a asp-action="Upsert" class="btn btn-primary">
-                <i class="fas fa-plus"></i> &nbsp; Create New Training
+                <i class="fas fa-plus"></i> &nbsp; @language.GetKey("Create New Training")
             </a>
         </div>
     </div>
@@ -21,10 +25,10 @@
                 <tr>
                     <th></th>
                     <th>
-                        Name
+                        @language.GetKey("Name")
                     </th>
                     <th>
-                        Technology
+                        @language.GetKey("Technology")
                     </th>
                     <th></th>
                 </tr>
@@ -62,7 +66,7 @@
     }
     else
     {
-        <p> No trainings exists.</p>
+        <p>@language.GetKey("No trainings exists")</p>
     }
 
 </div>

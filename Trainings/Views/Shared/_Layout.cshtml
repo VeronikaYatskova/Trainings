@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Trainings.Services
+
+@inject LanguageService language
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Тренинги</title>
+    <title>@ViewData["Title"] - Trainings</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Trainings.styles.css" asp-append-version="true" />
@@ -18,13 +22,13 @@
                 </a>
             </div>
             <nav class="header-nav">
-                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Список тренингов</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">О нас</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">Направления</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">@language.GetKey("Trainings")</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">@language.GetKey("About Us")</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">@language.GetKey("Technologies")</a>
             </nav>
             <div class="language">
-                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">RU</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="#" asp-action="Index">EN</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ru-RU">RU</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US">EN</a>
             </div>
         </div>
     </header>
@@ -46,4 +50,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+@*<script>
+    function SetCulture(selectedValue) {
+        var culture = "/?culture=" + selectedValue + "&ui-culture=" + selectedValue;
+        document.getElementById("cultureForm").action = culture;
+        document.getElementById("cultureForm").submit();
+    }
+</script>*@
 </html>
+
