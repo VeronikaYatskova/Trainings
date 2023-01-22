@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Trainings.Models.Request;
+using Trainings.Models.Response;
 using Trainings.Services.Abstracts;
 
 namespace Trainings.Controllers
@@ -104,6 +106,19 @@ namespace Trainings.Controllers
                 await trainingService.UpdateTraining(trainingModel);
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Register(Guid trainingId)
+        {
+            Console.WriteLine(trainingId);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(TrainingModel trainingModel)
+        {
             return RedirectToAction("Index");
         }
     }

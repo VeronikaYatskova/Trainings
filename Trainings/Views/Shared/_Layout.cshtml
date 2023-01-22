@@ -30,6 +30,18 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ru-RU">RU</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US">EN</a>
             </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-culture="ru-RU">Logout</a>
+            }
+            else
+            {
+                <div class="logo">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
+            }
         </div>
     </header>
     <div id="main">
@@ -50,12 +62,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-@*<script>
-    function SetCulture(selectedValue) {
-        var culture = "/?culture=" + selectedValue + "&ui-culture=" + selectedValue;
-        document.getElementById("cultureForm").action = culture;
-        document.getElementById("cultureForm").submit();
-    }
-</script>*@
 </html>
 

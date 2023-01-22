@@ -1,0 +1,20 @@
+﻿@model Trainings.Models.Response.TrainingModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1 class="bg-info text-white">Register</h1>
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TechnologyName"></label>
+        <input asp-for="TechnologyName" class="form-control" />
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>

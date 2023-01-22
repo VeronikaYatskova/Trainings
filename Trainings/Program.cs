@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Options;
 using System.Globalization;
 using System.Reflection;
 using Trainings.Data.Context;
+using Trainings.Data.Models;
 using Trainings.Data.Repositories;
 using Trainings.Data.Repositories.Abstracts;
 using Trainings.Services;
@@ -17,12 +19,22 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITrainingService, TrainingService>();
 builder.Services.AddScoped<ITechnologyService, TechnologyService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddSingleton<LanguageService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseLazyLoadingProxies()
            .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Trainings.Data")));
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+});
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -36,7 +48,6 @@ builder.Services.AddControllersWithViews()
             var assemblyName = new AssemblyName(typeof(ShareResource).GetTypeInfo().Assembly.FullName);
             return factory.Create("ShareResource", assemblyName.Name);
         };
-
     });
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -67,6 +78,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
