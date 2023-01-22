@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Trainings.Data.Models;
 
@@ -10,8 +11,8 @@ namespace Trainings.Data.Context
         {
         }
 
-        public DbSet<Training> Trainings { get; set; }
-        public DbSet<Technology> Technologies { get; set; }
-        public DbSet<User> Users { get; set; } 
+        public DbSet<Training>? Trainings { get; set; }
+        public DbSet<Technology>? Technologies { get; set; }
+        public DbSet<User>? ApplicationUsers { get; set; }
     }
 }

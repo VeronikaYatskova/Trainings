@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Trainings.Models.Request;
@@ -8,6 +7,7 @@ using Trainings.Services.Abstracts;
 
 namespace Trainings.Controllers
 {
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class TrainingController : Controller
     {
         private readonly ITrainingService trainingService;
@@ -109,7 +109,7 @@ namespace Trainings.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
+        [Authorize(Roles = WebConstants.StudentRole)]
         public async Task<IActionResult> Register(Guid trainingId)
         {
             Console.WriteLine(trainingId);

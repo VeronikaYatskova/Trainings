@@ -30,7 +30,7 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ru-RU">RU</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US">EN</a>
             </div>
-            @if (User.Identity.IsAuthenticated)
+            @*@if (User.Identity.IsAuthenticated)
             {
                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-culture="ru-RU">Logout</a>
             }
@@ -41,7 +41,8 @@
                         <i class="fa-solid fa-right-to-bracket"></i>
                     </a>
                 </div>
-            }
+            }*@
+            <partial name="_LoginPartial"/>
         </div>
     </header>
     <div id="main">
