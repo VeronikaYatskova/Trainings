@@ -20,15 +20,20 @@ namespace Trainings.Controllers
         public async Task<IActionResult> Index()
         {
             var trainings = await trainingService.GetTrainings();
-
+            
             return View(trainings);
         }
 
         public IActionResult ChangeLanguage(string culture)
         {
-            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+                new CookieOptions()
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1),
+                    IsEssential = true,
+                });
 
             return Redirect(Request.Headers["Referer"].ToString());
         }

@@ -6,7 +6,7 @@ namespace Trainings.Services
     public class LanguageService
     {
         private readonly IStringLocalizer _localizer;
-
+        
         public LanguageService(IStringLocalizerFactory factory)
         {
             var type = typeof(ShareResource);
