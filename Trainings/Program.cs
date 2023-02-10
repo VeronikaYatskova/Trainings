@@ -6,13 +6,13 @@ using Microsoft.Extensions.Options;
 using System.Globalization;
 using System.Reflection;
 using Trainings.Data.Context;
-using Trainings.Data.Models;
 using Trainings.Data.Repositories;
 using Trainings.Data.Repositories.Abstracts;
 using Trainings.Services;
 using Trainings.Services.Abstracts;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -24,7 +24,8 @@ builder.Services.AddSingleton<LanguageService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseLazyLoadingProxies()
-           .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Trainings.Data")));
+           .UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Trainings.Data")));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders()
     .AddDefaultUI()
@@ -56,6 +57,13 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
+
+builder.Services.AddAuthentication()
+    .AddGoogle(opts =>
+    {
+        opts.ClientId = configuration["Authentication:Google:ClientId"];
+        opts.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+    });
 
 var app = builder.Build();
 

@@ -6,7 +6,7 @@ namespace Trainings.Utilities.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (!context.ModelState.IsValid) // !filterContext.Controller.ViewData.ModelState.IsValid
+            if (!context.ModelState.IsValid)
             {
                 return;
             }
